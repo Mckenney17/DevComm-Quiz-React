@@ -2,7 +2,7 @@ import { getAllCourses } from '../utils/app-info'
 
 const homeData = {
     devName: localStorage.getItem('dev-name') || 'Dev',
-    selectedCourses: JSON.parse(localStorage.getItem('selected-courses')) || [],
+    selectedCourses: JSON.parse(localStorage.getItem('selected-courses')) || ['javascript'],
     allCourses: getAllCourses()
 }
 

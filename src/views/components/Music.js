@@ -1,5 +1,5 @@
 import React from 'react';
-import './Music.scss'
+import '../../styles/Music.scss'
 
 class Music extends React.Component {
     render() {

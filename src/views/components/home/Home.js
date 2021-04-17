@@ -1,11 +1,12 @@
 import React from 'react';
 import CourseBigButton from './Course-Big-Button';
 
-import './Home.scss';
+import '../../../styles/Home.scss';
 
 class Home extends React.Component {
   render() {
-
+    const courseBoxes = this.props.selectedCourses
+    .map((course) => <CourseBigButton key={course} courseName={course} />)
     return (
       <div className="home">
           <p id='greet'>
@@ -14,11 +15,7 @@ class Home extends React.Component {
           <p>Choose a Language</p>
 
           <div className='langs-section'>
-              {
-                this.props.selectedCourses.forEach((course) => {
-                  <CourseBigButton courseName={course} />
-                })
-              }
+              {courseBoxes}
               
               <div title="Add New Language" className="lang-box add-lang-btn" id='add-lang-btn'>
                   <span>+</span>

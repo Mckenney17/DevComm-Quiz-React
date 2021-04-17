@@ -1,4 +1,4 @@
-@import '../../../styles/_varsMixFuncs';
+@import 'varsMixFuncs';
 
 div.lang-box {
     @include flex(space-between, null, column);

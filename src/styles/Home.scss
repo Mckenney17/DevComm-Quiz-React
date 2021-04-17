@@ -1,4 +1,4 @@
-@import '../../../styles/varsMixFuncs';
+@import 'varsMixFuncs';
 
 div.home {
     width: 100%;
@@ -43,7 +43,7 @@ div.home {
     div.langs-section {
         padding-bottom: 10px;
         width: 100%;
-        @include flex();
+        @include flex(space-between);
         flex-wrap: wrap;
         overflow-y: auto;
         margin-top: 40px;

@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.scss';
 import './utils/css-deps/all.min.css'
+import './utils/css-deps/devicon.min.css'
+
+import './index.scss';
+
 import Home from './views/home';
 import homeData from './models/home'
 import Music from './views/components/Music'
