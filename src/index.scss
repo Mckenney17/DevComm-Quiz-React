@@ -1,0 +1,67 @@
+@import 'styles/_varsMixFuncs';
+
+
+html, body {
+  margin: 0;
+  font-family: Raleway, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
+}
+
+code {
+  font-family: 'Ubuntu Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:not(a):not(input) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+#container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  
+  #main-pane {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+
+    & > div {
+        width: 100%;
+        height: 100%;
+
+        &.home, &.question-page {
+            padding: 0 5%;
+        }
+        @include flex(null, null, column);
+    }
+
+    & > :not(.quiz-question-page):not(.quiz-solution-page) {
+      background: radial-gradient(100px, $deep-orange, $deep-orange calc(100px - 1px), transparent 100px) center 55vh,
+      radial-gradient(100px, #000, #000 calc(100px - 1px), transparent 100px) -30vw 45vh,
+      radial-gradient(100px, $cream, $cream calc(100px - 1px), transparent 100px) 37vw 57vh;
+      background-repeat: no-repeat;
+    }
+  }
+}
