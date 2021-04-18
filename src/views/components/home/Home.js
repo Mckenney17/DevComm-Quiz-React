@@ -8,7 +8,7 @@ class Home extends React.Component {
     super(props);
     this.showAllCoursesModal = this.showAllCoursesModal.bind(this);
     this.hideAllCoursesModal = this.hideAllCoursesModal.bind(this);
-    this.state = { modalVisible: false, dropdownVisible: false, musicPlaying: false };
+    this.state = { modalVisible: false, dropdownVisible: false };
   }
 
   showAllCoursesModal() {
