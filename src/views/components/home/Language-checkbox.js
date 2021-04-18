@@ -11,12 +11,20 @@ class LanguageCheckBox extends React.Component {
     }
 
     toggleCheck() {
-        this.setState((state) => ({ checked: !state.checked }))
+        this.setState((state) => state.checked
+        ?  (this.removeCourse(), { checked: false })
+        : (this.addCourse(), { checked: true }))
+    }
+
+    addCourse() {
+        addToSelectedCourses(this.props.language)
+    }
+
+    removeCourse() {
+        removeFromSelectedCourses(this.props.language)
     }
     
     render() {
-        console.log(this.state.checked);
-        this.state.checked ? addToSelectedCourses(this.props.language) : removeFromSelectedCourses(this.props.language)
         return (
             <span onClick={this.toggleCheck} className={`lang-choice ${this.state.checked ? 'lang-chosen' : null}`} id={`lang-choice-${this.props.language}`}>
                 <LanguageText language={this.props.language} />
