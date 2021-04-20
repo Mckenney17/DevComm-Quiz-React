@@ -2,31 +2,54 @@ import React from 'react';
 import CourseBoxButton from './Course-Big-Button';
 
 import AllCoursesModal from './All-courses-modal';
+import NameSetDropdownInput from './Name-set-dropdown-input';
+import { saveSelectedCourses, saveDevName, getSelectedCourses } from '../../../utils/store';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.showAllCoursesModal = this.showAllCoursesModal.bind(this);
-    this.hideAllCoursesModal = this.hideAllCoursesModal.bind(this);
-    this.state = { modalVisible: false, dropdownVisible: false };
+    this.saveSelectedCourses = this.saveSelectedCourses.bind(this);
+    this.showNameSetDropdown = this.showNameSetDropdown.bind(this);
+    this.state = { modalVisible: false, dropdownVisible: false, devName: this.props.getDevName(), selectedCourses: this.props.getSelectedCourses().sort() };
   }
 
   showAllCoursesModal() {
     this.setState({ modalVisible: true })
   }
-  
+
   hideAllCoursesModal() {
     this.setState({ modalVisible: false })
   }
   
+  saveSelectedCourses() {
+    saveSelectedCourses();
+    this.hideAllCoursesModal();
+    this.setState({ selectedCourses: getSelectedCourses().sort() })
+  }
+
+  showNameSetDropdown() {
+    this.setState({ dropdownVisible: true })
+  }
+
+  hideNameSetDropdown() {
+    this.setState({ dropdownVisible: false })
+  }
+
+  setDevName(devName) {
+    saveDevName(devName);
+    this.hideNameSetDropdown();
+    this.setState({ devName })
+  }
+  
   render() {
-    const courseBoxButtons = this.props.getSelectedCourses().sort()
-    .map((course) => <CourseBoxButton key={course} courseName={course} />)
+    const courseBoxButtons = this.state.selectedCourses.map((course) => <CourseBoxButton key={course} courseName={course} />)
     return (
       <div className="home">
-          {this.state.modalVisible ? <AllCoursesModal hideModal={this.hideAllCoursesModal} languages={this.props.allCourses} /> : null}
+          {this.state.dropdownVisible ? <NameSetDropdownInput setDevName={this} currentDevName={this.state.devName} /> : null}
+          {this.state.modalVisible ? <AllCoursesModal saveSelectedCourses={this.saveSelectedCourses} languages={this.props.allCourses} /> : null}
           <p id='greet'>
-            <span id="greeting">Hi,<span id='handwave'>&#x1f44b;</span></span><br /><span id="dev-name">{this.props.getDevName()}</span><i id='edit-nickname' className="fas fa-paint-brush fa-fw"></i>
+            <span id="greeting">Hi,<span id='handwave'>&#x1f44b;</span></span><br /><span id="dev-name">{this.state.devName}</span><i onClick={this.showNameSetDropdown} id='edit-nickname' className="fas fa-paint-brush fa-fw"></i>
           </p>
           <p>Choose a Language</p>
           <div className='langs-section'>

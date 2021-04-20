@@ -8,12 +8,10 @@ let selectedCourses = null;
 const addToSelectedCourses = (course) => {
     if (!selectedCourses) selectedCourses = getSelectedCourses();
     if (!selectedCourses.includes(course)) selectedCourses.push(course);
-    localStorage.setItem('selected-courses', JSON.stringify(selectedCourses))
 }
 const removeFromSelectedCourses = (course) => {
     if (!selectedCourses) selectedCourses = getSelectedCourses();
     selectedCourses.splice(selectedCourses.indexOf(course), 1);
-    localStorage.setItem('selected-courses', JSON.stringify(selectedCourses))
 }
 
 const getSelectedCourses = () => JSON.parse(localStorage.getItem('selected-courses')) || [];
@@ -22,7 +20,9 @@ const courseSelected = (course) => {
     if (!selectedCourses) selectedCourses = getSelectedCourses();
     return selectedCourses.includes(course);
 }
-
+const saveSelectedCourses = () => {
+    localStorage.setItem('selected-courses', JSON.stringify(selectedCourses))
+}
 export {
     saveDevName,
     addToSelectedCourses,
@@ -30,4 +30,5 @@ export {
     courseSelected,
     getDevName,
     getSelectedCourses,
+    saveSelectedCourses,
 }

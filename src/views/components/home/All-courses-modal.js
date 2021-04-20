@@ -8,7 +8,7 @@ const AllCoursesModal = (props) => {
             <div className="avail-langs">
                 {languageCheckBoxes}
             </div>
-            <button onClick={props.hideModal} className="langs-chosen-save">Save</button>
+            <button onClick={props.saveSelectedCourses} className="langs-chosen-save">Save</button>
         </div>
     )
 }
