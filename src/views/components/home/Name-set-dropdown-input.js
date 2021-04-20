@@ -12,11 +12,12 @@ class NameSetDropdownInput extends React.Component {
     }
 
     render() {
+        const parentThis = this.props.parentThis;
         return (
             <div className="name-set-modal">
                 <p>Name</p>
                 <input type="text" id="name-input" value={this.state.value} onChange={this.handleInputChange} />
-                <button id='set-name' onClick={this.props.setDevName.setDevName.bind(this.props.setDevName, this.state.value)}>OK</button>
+                <button id='set-name' onClick={parentThis.setDevName.bind(parentThis, this.state.value)}>OK</button>
                 <div></div>
             </div>
         )

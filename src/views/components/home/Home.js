@@ -46,7 +46,7 @@ class Home extends React.Component {
     const courseBoxButtons = this.state.selectedCourses.map((course) => <CourseBoxButton key={course} courseName={course} />)
     return (
       <div className="home">
-          {this.state.dropdownVisible ? <NameSetDropdownInput setDevName={this} currentDevName={this.state.devName} /> : null}
+          {this.state.dropdownVisible ? <NameSetDropdownInput parentThis={this} currentDevName={this.state.devName} /> : null}
           {this.state.modalVisible ? <AllCoursesModal saveSelectedCourses={this.saveSelectedCourses} languages={this.props.allCourses} /> : null}
           <p id='greet'>
             <span id="greeting">Hi,<span id='handwave'>&#x1f44b;</span></span><br /><span id="dev-name">{this.state.devName}</span><i onClick={this.showNameSetDropdown} id='edit-nickname' className="fas fa-paint-brush fa-fw"></i>
