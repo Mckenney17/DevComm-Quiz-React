@@ -14,11 +14,13 @@ class App extends React.Component {
     }
 
     render() {
+        const audio = new Audio();
+        audio.src = '../../utils/cool_music.mp3';
         let currentPage = this.state.currentPage === 'home'
         ? <Home {...homeData} /> : null
         return (
             <div id='container'>
-                <Music />
+                <Music music={audio} />
                 <div id='main-pane'>
                     {currentPage}
                 </div>

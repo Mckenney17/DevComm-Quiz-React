@@ -18,7 +18,7 @@ class NameSetDropdownInput extends React.Component {
                 <p>Name</p>
                 <input type="text" id="name-input" value={this.state.value} onChange={this.handleInputChange} />
                 <button id='set-name' onClick={parentThis.setDevName.bind(parentThis, this.state.value)}>OK</button>
-                <div></div>
+                <div onClick={parentThis.hideNameSetDropdown.bind(parentThis)}></div>
             </div>
         )
     }
