@@ -1,16 +1,18 @@
 @import 'styles/varsMixFuncs';
 @import 'styles/App';
 @import 'styles/Music';
-@import 'styles/Home';
+@import 'styles/Home-Page';
 @import 'styles/Course-Box-Button';
 @import 'styles/All-courses-modal';
 @import 'styles/Language-checkbox';
 @import 'styles/Name-set-dropdown-input';
+@import 'styles/Levels-Page';
+@import 'styles/Level-Boxes';
 
 
 html, body {
   margin: 0;
-  font-family: Futura, Raleway, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Futura PT', Raleway, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,6 +1,6 @@
 import React from "react"
 
-import LanguageText from "../LanguageTextFormat"
+import LanguageText from "../utils/LanguageTextFormat"
 import { addToSelectedCourses, courseSelected, removeFromSelectedCourses } from "../../../utils/store"
 
 class LanguageCheckBox extends React.Component {

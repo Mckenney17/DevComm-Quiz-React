@@ -8,12 +8,7 @@ class Music extends React.Component {
     }
 
     togglePlay() {
-        console.log(this.props.musicData);
-        this.setState((state) => {
-            return state.paused
-            ? (this.props.music.play(), { paused: false })
-            : (this.pauseMusic(), { paused: true })
-        })
+        this.setState((state) => ({ state: !state.paused }))
     }
 
     render() {

@@ -5,7 +5,7 @@ import AllCoursesModal from './All-courses-modal';
 import NameSetDropdownInput from './Name-set-dropdown-input';
 import { saveSelectedCourses, saveDevName, getSelectedCourses } from '../../../utils/store';
 
-class Home extends React.Component {
+class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.showAllCoursesModal = this.showAllCoursesModal.bind(this);
@@ -43,11 +43,14 @@ class Home extends React.Component {
   }
   
   render() {
-    const courseBoxButtons = this.state.selectedCourses.map((course) => <CourseBoxButton key={course} courseName={course} />)
+    const courseBoxButtons = this.state.selectedCourses
+    .map((course) => <CourseBoxButton App={this.props.App} key={course} courseName={course} />)
+
     return (
       <div className="home">
-          {this.state.dropdownVisible ? <NameSetDropdownInput parentThis={this} currentDevName={this.state.devName} /> : null}
+          {this.state.dropdownVisible ? <NameSetDropdownInput Home={this} currentDevName={this.state.devName} /> : null}
           {this.state.modalVisible ? <AllCoursesModal saveSelectedCourses={this.saveSelectedCourses} languages={this.props.allCourses} /> : null}
+
           <p id='greet'>
             <span id="greeting">Hi,<span id='handwave'>&#x1f44b;</span></span><br /><span id="dev-name">{this.state.devName}</span><i onClick={this.showNameSetDropdown} id='edit-nickname' className="fas fa-paint-brush fa-fw"></i>
           </p>
@@ -64,4 +67,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default HomePage

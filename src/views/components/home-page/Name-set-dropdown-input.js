@@ -12,13 +12,13 @@ class NameSetDropdownInput extends React.Component {
     }
 
     render() {
-        const parentThis = this.props.parentThis;
+        const Home = this.props.Home;
         return (
             <div className="name-set-modal">
                 <p>Name</p>
                 <input type="text" id="name-input" value={this.state.value} onChange={this.handleInputChange} />
-                <button id='set-name' onClick={parentThis.setDevName.bind(parentThis, this.state.value)}>OK</button>
-                <div onClick={parentThis.hideNameSetDropdown.bind(parentThis)}></div>
+                <button id='set-name' onClick={Home.setDevName.bind(Home, this.state.value)}>OK</button>
+                <div onClick={Home.hideNameSetDropdown.bind(Home)}></div>
             </div>
         )
     }
