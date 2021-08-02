@@ -6,7 +6,7 @@
     @include flex(center, center);
     width: 40px;
     height: 40px;
-    position: fixed;
+    position: absolute;
     z-index: 5;
     top: 15px;
     left: 82%;
