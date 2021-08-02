@@ -39,6 +39,7 @@ code {
 button {
   outline: none;
   cursor: pointer;
+  font-family: inherit;
 }
 
 #root {
@@ -53,8 +54,9 @@ button {
 
   .phone {
     width: 320px;
-    height: 618px;
-    box-shadow: inset 0 0 5px rgba(#000, .2);
+    height: 610px;
+    box-shadow: 0 0 5px rgba(#000, .3);
     border-radius: 26px;
+    overflow: hidden;
   }
 }

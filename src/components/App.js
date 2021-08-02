@@ -24,10 +24,12 @@ function App() {
         <div id="container" className="container">
             <Audio />
             <i id="sound" onClick={handleMusicToggle} className={musicOn ? 'music-on' : ''}><FaMusic /></i>
-            {
-                location === 'home'
-                ? <Home /> : null
-            }
+            <div id="main-pane">
+                {
+                    location === 'home'
+                    ? <Home /> : null
+                }
+            </div>
         </div>
     )
 }
