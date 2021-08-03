@@ -4,7 +4,7 @@ import { formatLangText } from '../utils/quick-funcs';
 import QuizLanguagesPanel from './QuizLanguagesPanel';
 import UsernameEditDropdown from './UsernameEditDropdown';
 
-function Home() {
+function Home({ setSelectedQuiz, setLocation }) {
     const [username, setUsername] = useState(localStorage.getItem?.('username') || 'Dev');
     const [userQuizLanguageChoices, setUserQuizLanguageChoices] = useState(JSON.parse(localStorage.getItem?.('userQuizLanguageChoices')) || []);
 
@@ -23,6 +23,12 @@ function Home() {
         setUsernameEditDropdownVisible(true)
     }
 
+    const handleQuizBoxClick = (ev) => {
+        const language = ev.currentTarget.id.slice(ev.currentTarget.id.lastIndexOf('-') + 1)
+        setSelectedQuiz(language);
+        setLocation('levels')
+    }
+
     return (
         <div className="home">
             {/* LanguagesPanel */} 
@@ -34,7 +40,7 @@ function Home() {
             <p>Choose a Language</p>
             <div className='langs-section'>
                 {userQuizLanguageChoices.map((language) =>(
-                    <div className="lang-box" key={language} id={`lang-box-${language}`}>
+                    <div className="lang-box" key={language} id={`lang-box-${language}`} onClick={handleQuizBoxClick}>
                         <i className={`devicon-${language}-plain`}></i>
                         <p>{formatLangText(language)}</p>
                     </div>

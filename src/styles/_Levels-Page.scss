@@ -2,9 +2,10 @@ div.quiz-levels-page {
     @include flex(center, null, column);
     .top {
         @include flex(space-evenly, center);
+        background: #fff;
         padding: 0 6%;
         width: 100%;
-        position: fixed;
+        position: absolute;
         top: 0;
         height: 70px;
         border-radius: 0 0 15px 15px;
@@ -41,13 +42,13 @@ div.quiz-levels-page {
         }
     }
     .levels-section {
-        --beginnerComp: 50;
-        --intermediateComp: 60;
-        --advancedComp: 70;
-        --ninjaComp: 80;
+        --beginnerComp: 0;
+        --intermediateComp: 0;
+        --advanceComp: 0;
 
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        row-gap: 10px;
         padding: 0 6%;
         margin-top: 50px;
     }
