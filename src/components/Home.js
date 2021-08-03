@@ -1,22 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaPaintBrush } from 'react-icons/fa';
 import { formatLangText } from '../utils/quick-funcs';
 import QuizLanguagesPanel from './QuizLanguagesPanel';
+import UsernameEditDropdown from './UsernameEditDropdown';
 
 function Home() {
     const [username, setUsername] = useState(localStorage.getItem?.('username') || 'Dev');
-    const [userQuizLanguageChoices, setUserQuizLanguageChoices] = useState(JSON.parse(localStorage.getItem?.('userQuizLanguageChoices')) || ['javascript']);
+    const [userQuizLanguageChoices, setUserQuizLanguageChoices] = useState(JSON.parse(localStorage.getItem?.('userQuizLanguageChoices')) || []);
 
-    const [modalVisible, setModalVisible] = useState(true);
+    const [panelVisible, setPanelVisible] = useState(false);
+    const [usernameEditDropdownVisible, setUsernameEditDropdownVisible] = useState(false)
+
+    useEffect(() => {
+        if (userQuizLanguageChoices.length) localStorage.setItem('userQuizLanguageChoices', JSON.stringify(userQuizLanguageChoices));
+    }, [userQuizLanguageChoices])
 
     const handleAddLanguageBtnClick = () => {
+        setPanelVisible(true)
+    }
 
+    const handleBrushBtnClick = () => {
+        setUsernameEditDropdownVisible(true)
     }
 
     return (
         <div className="home">
-            {modalVisible ? <QuizLanguagesPanel /* allQuizLanguages={} */ userQuizLanguageChoices={userQuizLanguageChoices} /> : ''}
-            <p id='greet'><span id="greeting">Hi,<span id='handwave'>&#x1f44b;</span></span><br/><span id="dev-name">{username}</span><i id='edit-nickname'><FaPaintBrush /></i></p>
+            {/* LanguagesPanel */} 
+            {panelVisible ? <QuizLanguagesPanel userQuizLanguageChoices={userQuizLanguageChoices} setPanelVisible={setPanelVisible} setUserQuizLanguageChoices={setUserQuizLanguageChoices} /> : ''}
+            {/* Name Edit Modal */}        
+            <UsernameEditDropdown usernameEditDropdownVisible={usernameEditDropdownVisible} setUsernameEditDropdownVisible={setUsernameEditDropdownVisible} setUsername={setUsername} username={username}/>
+
+            <p id='greet'><span id="greeting">Hi,<span id='handwave'>&#x1f44b;</span></span><br/><span id="dev-name">{username}</span><i id='edit-nickname' onClick={handleBrushBtnClick}><FaPaintBrush /></i></p>
             <p>Choose a Language</p>
             <div className='langs-section'>
                 {userQuizLanguageChoices.map((language) =>(
