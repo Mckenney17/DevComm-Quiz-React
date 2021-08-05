@@ -4,12 +4,14 @@ import Audio from './Audio'
 import Home from './Home'
 import Levels from './Levels'
 import Modules from './Modules'
+import Quiz from './Quiz'
 
 function App() {
     const [musicOn, setMusicOn] = useState(false)
     const [location, setLocation] = useState('home')
     const [selectedQuiz, setSelectedQuiz] = useState('')
     const [selectedLevel, setSelectedLevel] = useState('')
+    const [selectedModule, setSelectedModule] = useState('')
 
     useEffect(() => {
         const audio =  document.getElementById('music')
@@ -33,7 +35,8 @@ function App() {
                     location === 'home'
                     ? <Home setSelectedQuiz={setSelectedQuiz} setLocation={setLocation} /> : location === 'levels'
                     ? <Levels setLocation={setLocation} language={selectedQuiz} setSelectedLevel={setSelectedLevel} /> : location === 'modules'
-                    ? <Modules setLocation={setLocation} language={selectedQuiz} level={selectedLevel} /> : null
+                    ? <Modules setLocation={setLocation} setModule={setSelectedModule} language={selectedQuiz} level={selectedLevel} /> : location === 'quiz'
+                    ? <Quiz setLocation={setLocation} language={selectedQuiz} level={selectedLevel} module={selectedModule} /> : null
                 }
             </div>
         </div>
