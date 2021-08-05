@@ -8,11 +8,12 @@
 @import 'styles/Name-set-dropdown-input';
 @import 'styles/Levels-Page';
 @import 'styles/Level-Boxes';
+@import 'styles/Modules-Page';
 
 
 html, body {
   margin: 0;
-  font-family: 'Futura PT', Raleway, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: Raleway, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,6 +41,8 @@ button {
   outline: none;
   cursor: pointer;
   font-family: inherit;
+  outline: none;
+  border: none;
 }
 
 #root {

@@ -4,6 +4,7 @@ import { formatLangText } from '../utils/quick-funcs';
 import QuizLanguagesPanel from './QuizLanguagesPanel';
 import UsernameEditDropdown from './UsernameEditDropdown';
 
+
 function Home({ setSelectedQuiz, setLocation }) {
     const [username, setUsername] = useState(localStorage.getItem?.('username') || 'Dev');
     const [userQuizLanguageChoices, setUserQuizLanguageChoices] = useState(JSON.parse(localStorage.getItem?.('userQuizLanguageChoices')) || []);
@@ -13,7 +14,8 @@ function Home({ setSelectedQuiz, setLocation }) {
 
     useEffect(() => {
         if (userQuizLanguageChoices.length) localStorage.setItem('userQuizLanguageChoices', JSON.stringify(userQuizLanguageChoices));
-    }, [userQuizLanguageChoices])
+        localStorage.setItem('username', username)
+    }, [userQuizLanguageChoices, username])
 
     const handleAddLanguageBtnClick = () => {
         setPanelVisible(true)

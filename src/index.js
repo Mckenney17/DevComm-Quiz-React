@@ -4,6 +4,7 @@ import DesktopAppVersion from './components/DesktopAppVersion';
 import MobileAppVersion from './components/MobileAppVersion';
 
 import './index.scss';
+
 import './styles/devicon.min.css'
 
 // DesktopAppVersion // MobileAppVersion

@@ -2,7 +2,7 @@ import React from 'react'
 import { formatLangText } from '../utils/quick-funcs'
 import LevelCard from './LevelCard';
 
-function Levels({ setLocation, language }) {
+function Levels({ setLocation, setSelectedLevel, language }) {
     const levels = ['beginner', 'intermediate', 'advance'];
     return (
         <div className="quiz-levels-page" id={`lang-${language}`}>
@@ -15,7 +15,7 @@ function Levels({ setLocation, language }) {
                 <div></div>
             </div>
             <div className="levels-section">
-                {levels.map((level) => <LevelCard language={language} level={level} key={level} />)}
+                {levels.map((level) => <LevelCard language={language} level={level} key={level} setLocation={setLocation} setSelectedLevel={setSelectedLevel} />)}
             </div>
         </div>
     )
