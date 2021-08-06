@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
+import ReactHtmlParser from 'react-html-parser';
 import { FaClock, FaGithub, FaTwitter } from 'react-icons/fa'
-import { formatLangText, unpackLink } from '../utils/quick-funcs'
+import { formatLangText, markdownFormat, unpackLink } from '../utils/quick-funcs'
 import QuizEngine from '../utils/quizEngine'
 import Timer from './Timer'
 import hljs from 'highlight.js';
 import 'highlight.js/scss/gradient-light.scss';
+import Option from './Option';
+
 
 function Quiz({ setLocation, language, level, module: moduleKey }) {
     const moduleNumber = moduleKey.slice(moduleKey.indexOf(' ') + 1)
@@ -13,11 +16,18 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
 
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0)
     const [questionsAnsweredCount, setQuestionsAnsweredCount] = useState(0)
+    const [checkedOptions, setCheckedOptions] = useState(
+        questions.reduce((checkedOptions, { questionType }, questionIndex) => {
+            const questionNumber = questionIndex + 1;
+            checkedOptions[`question-${questionNumber}`] = questionType === 'multiple-answers' ? [] : ''
+            return checkedOptions
+        }, {})
+    )
     const [staticTime] = useState(new Date())
     const qsRef = useRef(null)
 
     useEffect(() => {
-        for (const codeBlock of document.querySelectorAll('.question-code-block')) {
+        for (const codeBlock of document.querySelectorAll('code')) {
             hljs.highlightElement(codeBlock)
         }
     }, [])
@@ -69,14 +79,20 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
             </div>
             <div className='question-section-container'>
                 <div className="question-section" ref={qsRef}>
-                    {questions.map(({ questionStatement, questionType, code }, questionIndex) => {
+                    {questions.map(({ questionStatement, questionType, code, options }, questionIndex) => {
                     const questionNumber = questionIndex + 1
                     return <div className='question-components-container' id={`question-${questionNumber}-components-container`} key={questionNumber}>
-                        <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}>{questionStatement}</p>
+                        <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}>{ ReactHtmlParser(markdownFormat(questionStatement, language)) }</p>
                         <div className={`code-block-container ${code ? '' : 'hide'}`}>
                             <pre><code id={`question-${questionNumber}-code-block`} className={`${language} question-code-block`}>{code}</code></pre>
                         </div>
                         <p className='what-to-do'>{questionType === 'single-answer' ? 'Choose the correct answer' : 'Choose all correct answers'}</p>
+                        <div className="options-container" id={`question-${questionNumber}-options-container`} data-question-type={questionType}>
+                        {options.map((option, optionIndex) => {
+                            const optionNumber = optionIndex + 1
+                            return <Option key={optionNumber} questionNumber={questionNumber} questionType={questionType} optionNumber={optionNumber} optionValue={option} checkedOptions={checkedOptions} setCheckedOptions={setCheckedOptions} />
+                        })}
+                        </div>
                     </div>
                     })}
                 </div>

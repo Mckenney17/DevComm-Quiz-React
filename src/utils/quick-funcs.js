@@ -74,8 +74,22 @@ const getLinkName = (str) => {
     return re.test(str) ? (re.lastIndex = 0, re.exec(str)[1]) : null;
 };
 
+const markdownFormat = (text, language) => {
+    const regexBold = /\*\*([^*]+)\*\*/gu;
+    const regexItalic = /\*([^*]+)\*/gu;
+    const regexUnderline = /__([^__]+)__/gu;
+    const regexCode = /`([^`]+)`/gu;
+    const formattedText = text
+        .replace(regexBold, '<b>$1</b>')
+        .replace(regexItalic, '<i>$1</i>')
+        .replace(regexUnderline, '<u>$1</u>')
+        .replace(regexCode, `<code class="${language}">$1</code>`);
+    return formattedText;
+}
+
 export {
     formatLangText,
     unpackLink,
+    markdownFormat,
     CustomMap,
 }
