@@ -59,7 +59,23 @@ const formatLangText = (langText) => {
     return langText[0].toUpperCase() + langText.slice(1);
 }
 
+const unpackLink = (linkStr) => {
+    if (!linkStr) return { valid: false, linkAddress: null, linkName: null }
+    return { valid: true, linkAddress: getLinkAddress(linkStr), linkName: getLinkName(linkStr) }
+}
+
+const getLinkAddress = (str) => {
+    const re = /\((.+)\)/gu;
+    return re.test(str) ? (re.lastIndex = 0, re.exec(str)[1]) : null;
+};
+
+const getLinkName = (str) => {
+    const re = /\[(.+)\]/gu;
+    return re.test(str) ? (re.lastIndex = 0, re.exec(str)[1]) : null;
+};
+
 export {
     formatLangText,
+    unpackLink,
     CustomMap,
 }

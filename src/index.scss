@@ -9,6 +9,7 @@
 @import 'styles/Levels-Page';
 @import 'styles/Level-Boxes';
 @import 'styles/Modules-Page';
+@import 'styles/Quiz-page';
 
 
 html, body {
@@ -41,8 +42,11 @@ button {
   outline: none;
   cursor: pointer;
   font-family: inherit;
-  outline: none;
   border: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 #root {
