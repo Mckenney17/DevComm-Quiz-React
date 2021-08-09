@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
 
-function Option({ questionNumber, questionType, optionNumber, optionValue, checkedOptions, setCheckedOptions }) {
+function Option({ questionNumber, optionNumber, optionValue, checkedOptions, setCheckedOptions }) {
     const checkedOption = checkedOptions[`question-${questionNumber}`];
     const handleOptionClick = () => {
         setCheckedOptions((prevCheckedOptions) => {
@@ -21,7 +21,7 @@ function Option({ questionNumber, questionType, optionNumber, optionValue, check
     return (
         <div onClick={handleOptionClick} className={`option question-${questionNumber}-option`} id={`question-${questionNumber}-option-${optionNumber}`}>
             <p className='option-text' id={`option-${optionNumber}-text`}>{optionValue}</p>
-            <div className={`option-check-circle ${checkedOption.includes(optionValue) ? 'checked' : ''}`} id={`option-check-circle-opt${optionNumber}`}>
+            <div className={`option-check-circle ${Array.isArray(checkedOption) ? (checkedOption.includes(optionValue) ? 'checked' : '') : (checkedOption === optionValue ? 'checked' : '')}`} id={`option-check-circle-opt${optionNumber}`}>
                 {/* <i><FaCheckCircle /></i> */}
             </div>
         </div>

@@ -9,22 +9,32 @@ import 'highlight.js/scss/gradient-light.scss';
 import Option from './Option';
 
 
-function Quiz({ setLocation, language, level, module: moduleKey }) {
+function Quiz({ setLocation, setSolutionsData, language, level, module: moduleKey }) {
     const moduleNumber = moduleKey.slice(moduleKey.indexOf(' ') + 1)
     const totalQuestion = QuizEngine.getLevelModuleTotalQuestions({ language, level, module: moduleKey })
     const questions = QuizEngine.getLevelModuleQuestions({ language, level, module: moduleKey });
 
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0)
     const [questionsAnsweredCount, setQuestionsAnsweredCount] = useState(0)
-    const [checkedOptions, setCheckedOptions] = useState(
-        questions.reduce((checkedOptions, { questionType }, questionIndex) => {
-            const questionNumber = questionIndex + 1;
-            checkedOptions[`question-${questionNumber}`] = questionType === 'multiple-answers' ? [] : ''
-            return checkedOptions
-        }, {})
-    )
+    const [checkedOptions, setCheckedOptions] = 
+    useState(questions.reduce((checkedOptions, { questionType }, questionIndex) => {
+        const questionNumber = questionIndex + 1;
+        checkedOptions[`question-${questionNumber}`] = questionType === 'multiple-answers' ? [] : ''
+        return checkedOptions
+    }, {}))
+
     const [staticTime] = useState(new Date())
     const qsRef = useRef(null)
+    const pbRef = useRef(null)
+    const timeSpent = useRef(null)
+
+    useEffect(() => {
+        pbRef.current.style.setProperty('--progress', `${100 - (questionsAnsweredCount / totalQuestion * 100)}%`)
+    }, [questionsAnsweredCount, totalQuestion])
+
+    useEffect(() => {
+        setQuestionsAnsweredCount(Object.values(checkedOptions).filter((value) => value.length).length)
+    }, [checkedOptions])
 
     useEffect(() => {
         for (const codeBlock of document.querySelectorAll('code')) {
@@ -46,6 +56,12 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
         setCurrentQuestionNumber((prevNum) => prevNum + 1)
     }
 
+    const handleSubmitBtnClick = () => {
+        const tsp = timeSpent.current.textContent;
+        setSolutionsData({ checkedOptions, timeSpent:tsp, moduleNumber, totalQuestion, questions })
+        setLocation('solutions')
+    }
+
     return (
         <div className="quiz-question-page" id={`lang-${language}-${level}-module-${moduleNumber}`}>
             <i id='big-lang-icon' className={`devicon-${language}-plain`}></i>
@@ -59,7 +75,7 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
             </div>
             <div className="question-top">
                 <div className="progress">
-                    <div className="progress-bar">
+                    <div className="progress-bar" ref={pbRef}>
                         <div className="progress-tracker-bar"></div>
                     </div>
                     <div className="progress-details">
@@ -67,14 +83,14 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
                         <div className="answered-questions-tracker">
                             <span id='ans-count' className='count'>{questionsAnsweredCount}</span>
                             <span>answered </span>
-                            <span id="rem-count" className='count'>{totalQuestion}</span>
+                            <span id="rem-count" className='count'>{totalQuestion - questionsAnsweredCount}</span>
                             <span>left</span>
                         </div>
                     </div>
                 </div>
                 <div className="timer">
                     <i><FaClock /></i>
-                    <p id="time-elapsed"><Timer staticTime={staticTime} /></p>
+                    <p id="time-elapsed" ref={timeSpent}><Timer staticTime={staticTime} /></p>
                 </div>
             </div>
             <div className='question-section-container'>
@@ -90,7 +106,7 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
                         <div className="options-container" id={`question-${questionNumber}-options-container`} data-question-type={questionType}>
                         {options.map((option, optionIndex) => {
                             const optionNumber = optionIndex + 1
-                            return <Option key={optionNumber} questionNumber={questionNumber} questionType={questionType} optionNumber={optionNumber} optionValue={option} checkedOptions={checkedOptions} setCheckedOptions={setCheckedOptions} />
+                            return <Option key={`${questionNumber}-${optionNumber}`} questionNumber={questionNumber} optionNumber={optionNumber} optionValue={option} checkedOptions={checkedOptions} setCheckedOptions={setCheckedOptions} />
                         })}
                         </div>
                     </div>
@@ -107,7 +123,9 @@ function Quiz({ setLocation, language, level, module: moduleKey }) {
                     <i><FaGithub /></i>
                     <span>{unpackLink(questions[currentQuestionNumber].githubHandle).linkName}</span>
                 </a> : <span></span> }
-                 <button id="submit-button">Submit</button>
+
+                <button id="submit-button" onClick={handleSubmitBtnClick}>Submit</button>
+
                 {unpackLink(questions[currentQuestionNumber].twitterHandle).valid ?
                 <a id="twitter-handle" href={unpackLink(questions[currentQuestionNumber].twitterHandle).linkAddress} target='_blank' rel='noopener noreferrer'>
                     <i><FaTwitter /></i>

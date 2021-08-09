@@ -15,7 +15,7 @@ const QuestionObjectListFetcher = {
     }
 }
 
-const quizData = () => localStorage?.getItem('quiz-data') ? new CustomMap(JSON.parse(localStorage.getItem('quiz-data'))) : new CustomMap()
+const quizData = () => localStorage?.getItem('quiz-data') ? CustomMap.init(JSON.parse(localStorage.getItem('quiz-data'))) : new CustomMap()
 
 const chunkIntoModules = (language, level) => {
     const questions = QuizEngine.getQuestionsInLevel(language, level)
@@ -68,7 +68,15 @@ class QuizEngine {
     }
 
     static getLevelCompletion(language, level) {
-        return quizData().composeGet('level-completions', language, level) || 0
+        const moduleScoresMap = quizData()?.composeGet('module-scores', language, level);
+        if (moduleScoresMap) {
+            let totalModulePercent = 0
+            for (const v of moduleScoresMap.values()) {
+                totalModulePercent += Number(v)
+            }
+            QuizEngine.setLevelCompletion({ language, level, completion: totalModulePercent / QuizEngine.getLevelModuleKeys(language, level).length })
+        }
+        return quizData()?.composeGet('level-completions', language, level) || 0
     }
 
     static setModuleScore({ language, level, module, score }) {
@@ -76,7 +84,7 @@ class QuizEngine {
     }
 
     static getModuleScore({ language, level, module }) {
-        return quizData().composeGet('module-scores', language, level, module) || 0
+        return quizData()?.composeGet('module-scores', language, level, module) || 0
     }
 }
 

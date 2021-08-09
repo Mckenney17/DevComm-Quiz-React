@@ -1,7 +1,7 @@
-class CustomMap extends Map {
-    constructor(entries = []) {
-        super(entries.reduce((ent, [k, v]) => {
-            if(Array.isArray(v)) ent.push([k, new CustomMap(v)])
+class CustomMap extends Map {    
+    static init(entries) {
+        return new CustomMap(entries.reduce((ent, [k, v]) => {
+            if(Array.isArray(v)) ent.push([k, CustomMap.init(v)])
             else ent.push([k, v])
             return ent;
         }, []))
@@ -13,17 +13,13 @@ class CustomMap extends Map {
         }
     }
 
-    get(key) {
-        return super.get(key)
-    }
-
     set(key, value) {
         super.set(key, value)
         return value instanceof CustomMap ? value : this
     }
     
     saveTo(storage) {
-        localStorage.setItem(storage, JSON.stringify(...this))
+        localStorage.setItem(storage, JSON.stringify([...this]))
     }
 
     /* Wheew! This is some crazy refactoring stuff, you don't wanna hear it
@@ -38,16 +34,18 @@ class CustomMap extends Map {
         Goto, quizEngine.js and search for this method to see its use.
     */
     autoSetGetSetSave({keys, lastPair, storage}) {
-        return keys.reduce((acc, key) => {
+        keys.reduce((acc, key) => {
             return acc.set(key, acc.get(key) || new CustomMap())
-        }, this).set(lastPair[0], lastPair[1]).saveTo(storage)
+        }, this).set(lastPair[0], lastPair[1])
+
+        this.saveTo(storage)
     }
 
     composeGet(...keys) {
         const result = keys.reduce((acc, key) => {
             return acc.get(key) || new CustomMap()
         }, this)
-        return result instanceof CustomMap ? undefined : result
+        return result instanceof CustomMap && !result.size ? undefined : result
     }
 }
 

@@ -5,6 +5,7 @@ import Home from './Home'
 import Levels from './Levels'
 import Modules from './Modules'
 import Quiz from './Quiz'
+import Solutions from './Solutions'
 
 function App() {
     const [musicOn, setMusicOn] = useState(false)
@@ -12,6 +13,7 @@ function App() {
     const [selectedQuiz, setSelectedQuiz] = useState('')
     const [selectedLevel, setSelectedLevel] = useState('')
     const [selectedModule, setSelectedModule] = useState('')
+    const [solutionsData, setSolutionsData] = useState(null)
 
     useEffect(() => {
         const audio =  document.getElementById('music')
@@ -36,7 +38,8 @@ function App() {
                     ? <Home setSelectedQuiz={setSelectedQuiz} setLocation={setLocation} /> : location === 'levels'
                     ? <Levels setLocation={setLocation} language={selectedQuiz} setSelectedLevel={setSelectedLevel} /> : location === 'modules'
                     ? <Modules setLocation={setLocation} setModule={setSelectedModule} language={selectedQuiz} level={selectedLevel} /> : location === 'quiz'
-                    ? <Quiz setLocation={setLocation} language={selectedQuiz} level={selectedLevel} module={selectedModule} /> : null
+                    ? <Quiz setLocation={setLocation} language={selectedQuiz} level={selectedLevel} module={selectedModule} setSolutionsData={setSolutionsData} /> : location === 'solutions'
+                    ? <Solutions setLocation={setLocation} language={selectedQuiz} level={selectedLevel} module={selectedModule} solutionsData={solutionsData} /> : null
                 }
             </div>
         </div>
