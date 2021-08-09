@@ -1,11 +1,14 @@
 import React from 'react'
-import App from './App'
+import Spinner from './Spinner'
 
 function DesktopAppVersion() {
+    const App = React.lazy(() => import('./App'))
     return (
         <div className="desktop-app-container">
             <div className="phone">
-                <App />
+                <React.Suspense fallback={<Spinner />}>
+                    <App />
+                </React.Suspense>
             </div>
         </div>
     )
