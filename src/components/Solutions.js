@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactHtmlParser from 'react-html-parser';
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { formatLangText, markdownFormat, unpackLink } from '../utils/quick-funcs'
