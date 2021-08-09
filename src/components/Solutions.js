@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactHtmlParser from 'react-html-parser';
 import { FaCheck, FaTimes } from 'react-icons/fa'
 import { formatLangText, markdownFormat, unpackLink } from '../utils/quick-funcs'
@@ -25,6 +25,27 @@ function Solutions({ setLocation, language, level, module, solutionsData: { chec
             hljs.highlightElement(codeBlock)
         }
     }, [viewMode])
+    
+    // solutionBoxes
+    const solutionBoxes = Object.values(checkedOptions).map((userAnswer, index) => {
+        const questionNumber = index + 1;
+        const { explanation, correctAnswer: authorAnswer, reference, code, questionStatement } = questions[index];
+        const answerStatus = !userAnswer.length ? 'skipped' : userAnswer.toString() === authorAnswer.toString() ? 'correct' : 'incorrect'
+
+        return (answerStatus !== viewMode && viewMode !== 'all') ? ''
+        : <div className="solution-box" id={`solution-box-q${questionNumber}`} key={questionNumber}>
+            <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}><b>Q{questionNumber}: </b>{ReactHtmlParser(markdownFormat(questionStatement, language))}</p>
+            <div className={`code-block ${code ? '' : 'hide'}`}>
+                <pre><code className={language}>{code}</code></pre>
+            </div>
+            <p className='user-answer'><b>Answer:</b>&nbsp;<span>{userAnswer.length ? userAnswer.toString().split(',').join(' | ') : <em>(skipped)</em>}</span>&nbsp;{answerStatus !== 'skipped' ? answerStatus === 'incorrect' ? <i className='incorrect-mark'><FaTimes /></i> : <i className='correct-mark'><FaCheck /></i> : <i></i>}</p>
+            <p className='correct-answer'><b>Correct Answer:</b>&nbsp;<span>{authorAnswer.toString().split(',').join(' | ')}</span></p>
+            <div className='explanation'><b><em>Explanation</em>:</b> {ReactHtmlParser(markdownFormat(explanation, language))}</div>
+            {unpackLink(reference).valid ? unpackLink(reference).linkAddress
+            ? <p className='links'><em>See:</em> <a href={unpackLink(reference).linkAddress} target="_blank" rel='noreferrer noopener'>{unpackLink(reference).linkName}</a></p>
+            : <p className='links'><em>See:</em> {unpackLink(reference).linkName}</p> : ''}
+        </div>
+    })
 
     return (
         <div className="quiz-solution-page" id={`lang-${language}-${level}-module-${moduleNumber}-solution`}>
@@ -71,25 +92,7 @@ function Solutions({ setLocation, language, level, module, solutionsData: { chec
                     </div>
                 </div>
                 <div className="answer-solutions">
-                    {Object.values(checkedOptions).map((userAnswer, index) => {
-                        const questionNumber = index + 1;
-                        const { explanation, correctAnswer: authorAnswer, reference, code, questionStatement } = questions[index];
-                        const answerStatus = !userAnswer.length ? 'skipped' : userAnswer.toString() === authorAnswer.toString() ? 'correct' : 'incorrect'
-
-                        return (answerStatus !== viewMode && viewMode !== 'all') ? ''
-                        : <div className="solution-box" id={`solution-box-q${questionNumber}`} key={questionNumber}>
-                            <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}><b>Q{questionNumber}: </b>{ReactHtmlParser(markdownFormat(questionStatement, language))}</p>
-                            <div className={`code-block ${code ? '' : 'hide'}`}>
-                                <pre><code className={language}>{code}</code></pre>
-                            </div>
-                            <p className='user-answer'><b>Answer:</b>&nbsp;<span>{userAnswer.length ? userAnswer.toString().split(',').join(' | ') : <em>(skipped)</em>}</span>&nbsp;{answerStatus !== 'skipped' ? answerStatus === 'incorrect' ? <i className='incorrect-mark'><FaTimes /></i> : <i className='correct-mark'><FaCheck /></i> : <i></i>}</p>
-                            <p className='correct-answer'><b>Correct Answer:</b>&nbsp;<span>{authorAnswer.toString().split(',').join(' | ')}</span></p>
-                            <div className='explanation'><b><em>Explanation</em>:</b> {ReactHtmlParser(markdownFormat(explanation, language))}</div>
-                            {unpackLink(reference).valid ? unpackLink(reference).linkAddress
-                            ? <p className='links'><em>See:</em> <a href={unpackLink(reference).linkAddress} target="_blank" rel='noreferrer noopener'>{unpackLink(reference).linkName}</a></p>
-                            : <p className='links'><em>See:</em> {unpackLink(reference).linkName}</p> : ''}
-                        </div>
-                    })}
+                    {solutionBoxes.every((value) => !value) ? <p className="notification">No {viewMode} answers</p> : solutionBoxes}
                 </div>
                 <div className="quote-section">
                     <p>Quote for you</p>
