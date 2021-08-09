@@ -84,6 +84,7 @@ div.quiz-solution-page {
 
                 span {
                     padding: 2px 10px;
+                    cursor: pointer;
 
                     &:nth-child(2) {
                         position: relative;
@@ -198,6 +199,9 @@ div.quiz-solution-page {
                 }
 
                 .code-block {
+                    &.hide {
+                        display: none;
+                    }
                     margin: 10px 0;
                     font-size: 17px;
 
@@ -208,6 +212,14 @@ div.quiz-solution-page {
                 }
 
                 p[class*=answer] {
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    @include flex;
+
+                    i {
+                        max-height: 17px;
+                    }
+
                     font: {
                         weight: weight(regular);
                         size: 17px;
@@ -221,8 +233,6 @@ div.quiz-solution-page {
                         color: red;
                     }
 
-                    overflow-x: auto;
-                    white-space: nowrap;
                 }
 
                 div.explanation {

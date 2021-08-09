@@ -3,7 +3,7 @@
         "language": "javascript",
         "questionType": "single-answer",
         "questionStatement": "What is the output of this code?",
-        "code": "const User = (name, age) => {\n\tthis.name = name;\n\tthis.age = age;]\n}\nconst user1 = new User('Dev', 25);\nconsole.log(user1);",
+        "code": "const User = (name, age) => {\n\tthis.name = name;\n\tthis.age = age;\n}\nconst user1 = new User('Dev', 25);\nconsole.log(user1);",
         "options": ["Error", "A new Object", "A new Constructor", "undefined"],
         "correctAnswer": "Error",
         "explanation": "Arrow functions are not used as Constructors",

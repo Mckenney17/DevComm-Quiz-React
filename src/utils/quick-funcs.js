@@ -33,7 +33,7 @@ class CustomMap extends Map {
         
         Goto, quizEngine.js and search for this method to see its use.
     */
-    autoSetGetSetSave({keys, lastPair, storage}) {
+    createNewElseUpdate({keys, lastPair, storage}) {
         keys.reduce((acc, key) => {
             return acc.set(key, acc.get(key) || new CustomMap())
         }, this).set(lastPair[0], lastPair[1])

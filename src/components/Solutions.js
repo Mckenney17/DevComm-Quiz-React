@@ -1,7 +1,10 @@
-import React from 'react'
-import { formatLangText } from '../utils/quick-funcs'
+import React, { useEffect, useState } from 'react'
+import ReactHtmlParser from 'react-html-parser';
+import { FaCheck, FaTimes } from 'react-icons/fa'
+import { formatLangText, markdownFormat, unpackLink } from '../utils/quick-funcs'
 import QuizEngine from '../utils/quizEngine'
 import getRandomQuote from '../utils/quotes'
+import hljs from 'highlight.js'
 
 function Solutions({ setLocation, language, level, module, solutionsData: { checkedOptions, timeSpent, moduleNumber, totalQuestion, questions } }) {
     const { skipped, correct, incorrect } = Object.values(checkedOptions)
@@ -11,8 +14,17 @@ function Solutions({ setLocation, language, level, module, solutionsData: { chec
         else remark.incorrect++
         return remark
     }, { skipped: 0, correct: 0, incorrect: 0 })
-    const { quote, quoteAuthorFirstName, quoteAuthorLastName, quoteAuthorTwitterAddress, quoteAuthorTwitterUsername } = getRandomQuote()
     QuizEngine.setModuleScore({ language, level, module, score: Math.round(correct / totalQuestion * 100) })
+
+    const { quote, quoteAuthorFirstName, quoteAuthorLastName, quoteAuthorTwitterAddress, quoteAuthorTwitterUsername } = getRandomQuote()
+
+    const [viewMode, setViewMode] = useState('all')
+
+    useEffect(() => {
+        for (const codeBlock of document.querySelectorAll('code')) {
+            hljs.highlightElement(codeBlock)
+        }
+    }, [viewMode])
 
     return (
         <div className="quiz-solution-page" id={`lang-${language}-${level}-module-${moduleNumber}-solution`}>
@@ -27,10 +39,10 @@ function Solutions({ setLocation, language, level, module, solutionsData: { chec
             <div className="solution-section">
                 <div className="filter-div">
                     <div className="filter-options">
-                        <span id='all'>All</span>
-                        <span id='correct'>Correct</span>
-                        <span id='incorrect'>Incorrect</span>
-                        <span id='skipped'>Skipped</span>
+                        <span id='all' className={viewMode === 'all' ? 'selected' : ''} onClick={() => setViewMode('all')}>All</span>
+                        <span id='correct' className={viewMode === 'correct' ? 'selected' : ''} onClick={() => setViewMode('correct')}>Correct</span>
+                        <span id='incorrect' className={viewMode === 'incorrect' ? 'selected' : ''} onClick={() => setViewMode('incorrect')}>Incorrect</span>
+                        <span id='skipped' className={viewMode === 'skipped' ? 'selected' : ''} onClick={() => setViewMode('skipped')}>Skipped</span>
                     </div>
                 </div>
                 <div className="overview">
@@ -59,7 +71,25 @@ function Solutions({ setLocation, language, level, module, solutionsData: { chec
                     </div>
                 </div>
                 <div className="answer-solutions">
-                    
+                    {Object.values(checkedOptions).map((userAnswer, index) => {
+                        const questionNumber = index + 1;
+                        const { explanation, correctAnswer: authorAnswer, reference, code, questionStatement } = questions[index];
+                        const answerStatus = !userAnswer.length ? 'skipped' : userAnswer.toString() === authorAnswer.toString() ? 'correct' : 'incorrect'
+
+                        return (answerStatus !== viewMode && viewMode !== 'all') ? ''
+                        : <div className="solution-box" id={`solution-box-q${questionNumber}`} key={questionNumber}>
+                            <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}><b>Q{questionNumber}: </b>{ReactHtmlParser(markdownFormat(questionStatement, language))}</p>
+                            <div className={`code-block ${code ? '' : 'hide'}`}>
+                                <pre><code className={language}>{code}</code></pre>
+                            </div>
+                            <p className='user-answer'><b>Answer:</b>&nbsp;<span>{userAnswer.length ? userAnswer.toString().split(',').join(' | ') : <em>(skipped)</em>}</span>&nbsp;{answerStatus !== 'skipped' ? answerStatus === 'incorrect' ? <i className='incorrect-mark'><FaTimes /></i> : <i className='correct-mark'><FaCheck /></i> : <i></i>}</p>
+                            <p className='correct-answer'><b>Correct Answer:</b>&nbsp;<span>{authorAnswer.toString().split(',').join(' | ')}</span></p>
+                            <div className='explanation'><b><em>Explanation</em>:</b> {ReactHtmlParser(markdownFormat(explanation, language))}</div>
+                            {unpackLink(reference).valid ? unpackLink(reference).linkAddress
+                            ? <p className='links'><em>See:</em> <a href={unpackLink(reference).linkAddress} target="_blank" rel='noreferrer noopener'>{unpackLink(reference).linkName}</a></p>
+                            : <p className='links'><em>See:</em> {unpackLink(reference).linkName}</p> : ''}
+                        </div>
+                    })}
                 </div>
                 <div className="quote-section">
                     <p>Quote for you</p>

@@ -64,7 +64,7 @@ class QuizEngine {
     }
 
     static setLevelCompletion({ language, level, completion }) {
-        quizData().autoSetGetSetSave({ keys:['level-completions', language], lastPair:[level, completion], storage: 'quiz-data' })
+        quizData().createNewElseUpdate({ keys:['level-completions', language], lastPair:[level, completion], storage: 'quiz-data' })
     }
 
     static getLevelCompletion(language, level) {
@@ -76,15 +76,15 @@ class QuizEngine {
             }
             QuizEngine.setLevelCompletion({ language, level, completion: totalModulePercent / QuizEngine.getLevelModuleKeys(language, level).length })
         }
-        return quizData()?.composeGet('level-completions', language, level) || 0
+        return quizData().composeGet('level-completions', language, level) || 0
     }
 
     static setModuleScore({ language, level, module, score }) {
-        quizData().autoSetGetSetSave({ keys:['module-scores', language, level], lastPair:[module, score], storage: 'quiz-data' })
+        quizData().createNewElseUpdate({ keys:['module-scores', language, level], lastPair:[module, score], storage: 'quiz-data' })
     }
 
     static getModuleScore({ language, level, module }) {
-        return quizData()?.composeGet('module-scores', language, level, module) || 0
+        return quizData().composeGet('module-scores', language, level, module) || 0
     }
 }
 

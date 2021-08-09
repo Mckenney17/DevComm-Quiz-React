@@ -98,7 +98,7 @@ function Quiz({ setLocation, setSolutionsData, language, level, module: moduleKe
                     {questions.map(({ questionStatement, questionType, code, options }, questionIndex) => {
                     const questionNumber = questionIndex + 1
                     return <div className='question-components-container' id={`question-${questionNumber}-components-container`} key={questionNumber}>
-                        <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}>{ ReactHtmlParser(markdownFormat(questionStatement, language)) }</p>
+                        <p className={`question-statement-${code ? 'with-code' : 'without-code'}`}>{ReactHtmlParser(markdownFormat(questionStatement, language))}</p>
                         <div className={`code-block-container ${code ? '' : 'hide'}`}>
                             <pre><code id={`question-${questionNumber}-code-block`} className={`${language} question-code-block`}>{code}</code></pre>
                         </div>
