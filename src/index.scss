@@ -69,4 +69,19 @@ a {
     border-radius: 26px;
     overflow: hidden;
   }
+
+  .option-text, pre code.hljs {
+    overflow-x: hidden !important;
+    &:hover {
+      overflow-x: auto !important;
+    }
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgb(223, 223, 223);
+      border-radius: 30px;
+    }
+  }
 }

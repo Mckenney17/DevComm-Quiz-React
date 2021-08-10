@@ -8,7 +8,7 @@ import './index.scss';
 import './utils/deps/devicon.min.css'
 
 // DesktopAppVersion // MobileAppVersion
-const deviceIsMobile = () => navigator.appVersion.includes('Mobile' || 'mobile') 
+const deviceIsMobile = () => navigator.appVersion.includes('Mobile' || 'mobile')
 
 ReactDOM.render(
   deviceIsMobile() ? <MobileAppVersion /> : <DesktopAppVersion /> ,

@@ -75,7 +75,7 @@
         "language": "javascript",
         "questionType": "single-answer",
         "questionStatement": "What is the output of this code?",
-        "code": "function func(y) {\n\tvar x = 2 + 3;\n\treturn x && y;\n}\nconsole.log(func(23));",
+        "code": "function func(y) {\n    var x = 2 + 3;\n    return x && y;\n}\nconsole.log(func(23));",
         "options": ["undefined", "5", "Error", "23"],
         "correctAnswer": "23",
         "explanation": "If the left operand of the **&&** operator is a *truthy value*, it returns the right operand not considering whether it is truthy or falsy.",

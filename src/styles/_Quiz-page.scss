@@ -237,6 +237,8 @@ div.quiz-question-page {
                         width: 77%;
                         height: 20px;
                         overflow-x: auto;
+                        overflow-y: hidden;
+                        @include flex(null, center);
                         white-space: nowrap;
                     }
 
@@ -350,15 +352,15 @@ div.quiz-question-page {
 
         a {
             @include flex(center, center, column);
-            color: rgb(173, 173, 173);
-            
+            color: $deep-orange;
             span {
+                color: rgb(173, 173, 173);
                 font-weight: weight(medium);
                 margin-left: 2px;
                 font-size: 10px;
                 
             }
-            &:hover {
+            &:hover span {
                 color: $deep-orange;
             }
 
