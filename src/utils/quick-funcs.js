@@ -47,6 +47,11 @@ class CustomMap extends Map {
         }, this)
         return result instanceof CustomMap && !result.size ? undefined : result
     }
+
+    clear(storage) {
+        super.clear()
+        this.saveTo(storage)
+    }
 }
 
 const formatLangText = (langText) => {
@@ -85,15 +90,9 @@ const markdownFormat = (text, language) => {
     return formattedText;
 }
 
-const devIconFormat = (language) => {
-    const lang = language[0].toUpperCase() + language.slice(1)
-    return `<Di${lang} />`
-}
-
 export {
     formatLangText,
     unpackLink,
     markdownFormat,
-    devIconFormat,
     CustomMap,
 }

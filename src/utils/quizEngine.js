@@ -68,13 +68,15 @@ class QuizEngine {
     }
 
     static getLevelCompletion(language, level) {
-        const moduleScoresMap = quizData()?.composeGet('module-scores', language, level);
+        const moduleScoresMap = quizData().composeGet('module-scores', language, level);
         if (moduleScoresMap) {
             let totalModulePercent = 0
             for (const v of moduleScoresMap.values()) {
                 totalModulePercent += Number(v)
             }
             QuizEngine.setLevelCompletion({ language, level, completion: totalModulePercent / QuizEngine.getLevelModuleKeys(language, level).length })
+        } else {
+            QuizEngine.setLevelCompletion({ language, level, completion: 0 })
         }
         return quizData().composeGet('level-completions', language, level) || 0
     }
@@ -85,6 +87,10 @@ class QuizEngine {
 
     static getModuleScore({ language, level, module }) {
         return quizData().composeGet('module-scores', language, level, module) || 0
+    }
+
+    static resetLevel(language, level) {
+        quizData().createNewElseUpdate({keys: ['module-scores', language], lastPair:[level, new CustomMap()], storage: 'quiz-data'})
     }
 }
 
