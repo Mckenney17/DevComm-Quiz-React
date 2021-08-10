@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { FaPaintBrush } from 'react-icons/fa';
-import { formatLangText } from '../utils/quick-funcs';
-import QuizLanguagesPanel from './QuizLanguagesPanel';
-import UsernameEditDropdown from './UsernameEditDropdown';
+import { FaPaintBrush } from 'react-icons/fa'
+import { formatLangText } from '../utils/quick-funcs'
+import QuizLanguagesPanel from './QuizLanguagesPanel'
+import UsernameEditDropdown from './UsernameEditDropdown'
 
 
 function Home({ setSelectedQuiz, setLocation }) {
-    const [username, setUsername] = useState(localStorage.getItem?.('username') || 'Dev');
-    const [userQuizLanguageChoices, setUserQuizLanguageChoices] = useState(JSON.parse(localStorage.getItem?.('userQuizLanguageChoices')) || []);
+    const [username, setUsername] = useState(localStorage.getItem?.('username') || 'Dev')
+    const [userQuizLanguageChoices, setUserQuizLanguageChoices] = useState(JSON.parse(localStorage.getItem?.('userQuizLanguageChoices')) || [])
 
-    const [panelVisible, setPanelVisible] = useState(false);
+    const [panelVisible, setPanelVisible] = useState(false)
     const [usernameEditDropdownVisible, setUsernameEditDropdownVisible] = useState(false)
 
     useEffect(() => {
-        if (userQuizLanguageChoices.length) localStorage.setItem('userQuizLanguageChoices', JSON.stringify(userQuizLanguageChoices));
+        if (userQuizLanguageChoices.length) localStorage.setItem('userQuizLanguageChoices', JSON.stringify(userQuizLanguageChoices))
         localStorage.setItem('username', username)
     }, [userQuizLanguageChoices, username])
 
@@ -27,7 +27,7 @@ function Home({ setSelectedQuiz, setLocation }) {
 
     const handleQuizBoxClick = (ev) => {
         const language = ev.currentTarget.id.slice(ev.currentTarget.id.lastIndexOf('-') + 1)
-        setSelectedQuiz(language);
+        setSelectedQuiz(language)
         setLocation('levels')
     }
 

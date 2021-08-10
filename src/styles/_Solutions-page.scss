@@ -293,7 +293,9 @@ div.quiz-solution-page {
                 @include flex(null, center);
 
                 i {
+                    @include flex;
                     font-size: 23px;
+                    max-height: 23px;
                 }
 
                 div.info {

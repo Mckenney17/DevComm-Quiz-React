@@ -85,9 +85,15 @@ const markdownFormat = (text, language) => {
     return formattedText;
 }
 
+const devIconFormat = (language) => {
+    const lang = language[0].toUpperCase() + language.slice(1)
+    return `<Di${lang} />`
+}
+
 export {
     formatLangText,
     unpackLink,
     markdownFormat,
+    devIconFormat,
     CustomMap,
 }

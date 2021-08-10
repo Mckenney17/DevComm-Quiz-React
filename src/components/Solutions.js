@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactHtmlParser from 'react-html-parser';
-import { FaCheck, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaTimes, FaTwitter } from 'react-icons/fa'
 import { formatLangText, markdownFormat, unpackLink } from '../utils/quick-funcs'
 import QuizEngine from '../utils/quizEngine'
 import getRandomQuote from '../utils/quotes'
@@ -99,7 +99,7 @@ function Solutions({ setLocation, language, level, module, solutionsData: { chec
                     <div className="quote-block">
                         <p className='quote'>{quote}</p>
                         <div className="owner-info">
-                            <i className='devicon-twitter-plain'></i>
+                            <i><FaTwitter /></i>
                             <div className='info'>
                                 <p className='name'>- <span>{quoteAuthorFirstName}</span> <span>{quoteAuthorLastName}</span></p>
                                 <a className="twitter-handle" href={quoteAuthorTwitterAddress}>@{quoteAuthorTwitterUsername}</a>

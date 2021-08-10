@@ -249,16 +249,14 @@ div.quiz-question-page {
                         bottom: 5px;
                         right: 7px;
                         width: 24px;
+                        i { display: none; }
                     }
 
                     div.checked {
-                        &::after {
-                            position: absolute;
-                            font-family: 'Font Awesome 5 Free';
-                            content: '\f00c';
-                            font-weight: 900;
-                            color: #fff;
+                        i {
                             @include flex(center, center);
+                            position: absolute;
+                            color: #fff;
                             top: 0;
                             left: 0;
                             right: 0;
@@ -266,6 +264,7 @@ div.quiz-question-page {
                             background: $deep-orange;
                             border-radius: var(--boxStyle);
                             font-size: 10px;
+                            font-weight: 900;
                         }
 
                         &::before {
