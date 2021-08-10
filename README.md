@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# DevComm. Quiz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A **Developer Quiz App**, packed with questions from different languages contributed by developers around the globe. Go to [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how to contribute. *It's pretty simple.* The App is a PWA which you can add to your device home screen for ease of access.
 
-## Available Scripts
+> *This App first launched on **17th October, 2020**. Just **VanillaJS**, No React*
 
-In the project directory, you can run:
+> *This App launched recently on . Now written in **React**.*
 
-### `yarn start`
+Access app [DevComm. Quiz]()
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## App Usage
+---
+**Home Page**
+---
+1. You have a music icon at the top right corner. If music helps your brain while learning, you can toggle that.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Set your name by clicking the brush icon, a dropdown to edit your name will appear from there you can change your name. By default you have a name *Dev*.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Next, you have a big **Add Language** box, click on this to select the languages of your choice in the modal that appear. *The languages that appear here depends on the languages that questions have been contributed on by developers.* Toggle **on** or **off** the language(s) of your choice. Click the **Save** button below. Then you'll see the languages you've selected appear in boxes.
 
-### `yarn build`
+4. Click on a language box to proceed to the **Level/Difficulty Page** of the selected language.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Levels/Difficulty Page**
+---
+1. Use the **Back** button to go back to the previous page(Home Page).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. On the levels boxes, you'll see on each boxes **the total number of questions contained in that level** and the **level percentage completion**. The level completion is calculated by the *total number of questions answered correctly in that level **divided by** the total number of questions in that level **multiplied by 100**.*
 
-### `yarn eject`
+3. Click a level box to proceed to the **Modules Page**.
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Modules Page**
+---
+1. Each module consist of 10 questions (*this is subject to change*), with a percentage score.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Click on **start** to proceed to take the quiz.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. Click on **RESET** to reset progress.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Quiz Page**
+---
+1. You can relate with this, the only part I have to guide you is that, *you pay attention to what the question asks you to do.* It can either tell you to **choose the correct answer** or **choose all correct answers**. In the former case, you can only select a single answer, while in the latter you can select multiple answers.
+![Quiz Page](/quiz-page.png)
 
-## Learn More
+2. Click on the **Submit** button to proceed to the **Solution Page** 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Visit [CONTRIBUTING.md](/CONTRIBUTING.md) to contribute your question.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> *Note: There are various ways to contribute to this App, you'll see in the contributing page.*
+---
+> Final Words:\
+I developed this App with the developer community in mind, it came from the idea that, what if as we learn day-by-day, we set quizzes from what we've learnt and share it to others, and also gain from others by solving their own quizzes too. And so I decided to create this. **We own this App together**, I'm just opportuned to be the creator, so lets nuture this baby together. I believe this App will solve some problems posed to the developer community, MOST ESPECIALLY FOR BEGINNERS.\
+The highest good remark you could give to me or this App is:
+> * Spreading the news about the App.
+> * Contibuting to the App: Adding Questions, Fixing Bugs and more...
 
-### Code Splitting
+*I love you, I love the DEV Community. Thanks!*
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Follow on [Twitter](https://twitter.com/Oluwarinolasam2)
