@@ -6,7 +6,7 @@ A **Developer Quiz App**, packed with questions from different languages contrib
 
 > *This App launched recently on . Now written in **React**.*
 
-Access app [DevComm. Quiz]()
+Access app [DevComm. Quiz](https://devcomm-quiz.netlify.app/)
 
 ## App Usage
 ---

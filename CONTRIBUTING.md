@@ -246,7 +246,7 @@ Even though this is Optional, I bet 90% developers will include this, *(smiles)*
 
 Okay!!! Oh! Oh!  I know this is long, but it's not complex, I just had to be detailed. You don't want a pull request rejected due to things you aren't aware of right?
 
-Check the question you just added at: [DevComm. Quiz](https://devcomm-quiz.hostman.site/)
+Check the question you just added at: [DevComm. Quiz](https://devcomm-quiz.netlify.app/)
 
 ![A typical question](quiz-page.png)
 
